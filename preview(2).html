@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123b56">
+<title>شبیه‌ساز آموزشی مطالعات مورد ـ شاهدی</title>
+
+<style>
+:root {
+    --primary:#123b56;
+    --secondary:#176b87;
+    --accent:#e5a33b;
+    --bg:#f2f6f9;
+    --card:#ffffff;
+    --text:#263746;
+    --muted:#687987;
+    --border:#dce5eb;
+    --green:#18865d;
+    --red:#c34444;
+    --lightgreen:#e5f5ed;
+    --lightred:#fff0ef;
+    --lightblue:#e9f3f8;
+    --radius:15px;
+}
+
+* {
+    box-sizing:border-box;
+}
+
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Tahoma,Arial,sans-serif;
+    line-height:1.9;
+    font-size:15px;
+}
+
+button,input,textarea {
+    font-family:inherit;
+}
+
+button {
+    cursor:pointer;
+}
+
+header {
+    background:linear-gradient(130deg,#102f47,#176b87);
+    color:white;
+    padding:28px 18px;
+}
+
+.header-inner {
+    max-width:1050px;
+    margin:auto;
+}
+
+.header-label {
+    display:inline-block;
+    background:#ffffff20;
+    padding:4px 13px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+header h1 {
+    font-size:25px;
+    margin:12px 0 5px;
+}
+
+header p {
+    color:#dceaf1;
+    margin:0;
+    font-size:14px;
+}
+
+.container {
+    max-width:1050px;
+    margin:25px auto;
+    padding:0 16px;
+}
+
+.card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:23px;
+    margin-bottom:18px;
+    box-shadow:0 3px 12px #15374d08;
+}
+
+h2 {
+    font-size:20px;
+    color:var(--primary);
+    margin-top:0;
+}
+
+h3 {
+    font-size:17px;
+    color:var(--secondary);
+}
+
+.small {
+    color:var(--muted);
+    font-size:13px;
+}
+
+.progress-box {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+}
+
+.progress-track {
+    height:10px;
+    background:#e5ebef;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill {
+    width:0%;
+    height:100%;
+    background:var(--green);
+    transition:width .3s;
+}
+
+.stage-nav {
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:8px;
+    margin-top:17px;
+}
+
+.stage-nav button {
+    background:#edf2f5;
+    border:1px solid var(--border);
+    color:var(--text);
+    border-radius:10px;
+    padding:9px 3px;
+    font-size:12px;
+}
+
+.stage-nav button.active {
+    background:var(--primary);
+    color:white;
+    border-color:var(--primary);
+}
+
+.stage-nav button.done {
+    background:var(--lightgreen);
+    border-color:#9acfb5;
+    color:#176c4c;
+}
+
+.stage {
+    display:none;
+}
+
+.stage.active {
+    display:block;
+    animation:appear .3s ease;
+}
+
+@keyframes appear {
+    from {opacity:0;transform:translateY(6px)}
+    to {opacity:1;transform:translateY(0)}
+}
+
+.stage-number {
+    display:inline-block;
+    background:var(--lightblue);
+    color:var(--secondary);
+    padding:4px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.learning-box {
+    background:#f6f9fb;
+    border-right:4px solid var(--secondary);
+    padding:15px;
+    border-radius:9px;
+    margin:17px 0;
+}
+
+.key-point {
+    background:#fff8e9;
+    border-right:4px solid var(--accent);
+    padding:12px 15px;
+    border-radius:9px;
+    margin:13px 0;
+}
+
+ul {
+    padding-right:22px;
+}
+
+li {
+    margin-bottom:6px;
+}
+
+.strip-title {
+    font-size:14px;
+    font-weight:bold;
+    margin:20px 0 10px;
+    color:var(--primary);
+}
+
+.strip {
+    display:flex;
+    flex-direction:row;
+    direction:rtl;
+    gap:5px;
+    margin:12px 0;
+}
+
+.segment {
+    flex:1;
+    min-width:0;
+    text-align:center;
+    padding:13px 5px;
+    border-radius:9px;
+    background:#e8eff4;
+    border:2px solid transparent;
+    font-size:12px;
+    line-height:1.7;
+    transition:.2s;
+}
+
+.segment strong {
+    display:block;
+    font-size:13px;
+}
+
+.segment.highlight {
+    border-color:#e5a33b;
+    background:#fff1d3;
+    box-shadow:0 0 0 3px #e5a33b35;
+}
+
+.segment.correct-highlight {
+    border-color:var(--green);
+    background:var(--lightgreen);
+}
+
+.segment.wrong-highlight {
+    border-color:var(--red);
+    background:var(--lightred);
+}
+
+.strip-note {
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.question-box {
+    margin-top:25px;
+    border-top:1px solid var(--border);
+    padding-top:20px;
+}
+
+.option {
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:11px;
+    margin:9px 0;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover {
+    background:#f5f9fb;
+    border-color:var(--secondary);
+}
+
+.option input {
+    margin-top:6px;
+    accent-color:var(--secondary);
+}
+
+.option.selected {
+    background:var(--lightblue);
+    border-color:var(--secondary);
+}
+
+.feedback {
+    display:none;
+    border-radius:10px;
+    padding:14px;
+    margin-top:15px;
+}
+
+.feedback.show {
+    display:block;
+}
+
+.feedback.good {
+    background:var(--lightgreen);
+    color:#176c4c;
+    border:1px solid #a6d7bd;
+}
+
+.feedback.bad {
+    background:var(--lightred);
+    color:#9c3030;
+    border:1px solid #e9b8b8;
+}
+
+.feedback strong {
+    display:block;
+    margin-bottom:5px;
+}
+
+.btn-row {
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.btn {
+    border:0;
+    padding:11px 20px;
+    border-radius:9px;
+    background:var(--primary);
+    color:white;
+    font-size:14px;
+}
+
+.btn:hover {
+    opacity:.9;
+}
+
+.btn.secondary {
+    background:#e8eef2;
+    color:var(--primary);
+}
+
+.btn.green {
+    background:var(--green);
+}
+
+.btn:disabled {
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.table-wrap {
+    overflow-x:auto;
+}
+
+table {
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0;
+    min-width:320px;
+}
+
+td,th {
+    border:1px solid var(--border);
+    padding:10px;
+    text-align:center;
+}
+
+th {
+    background:var(--lightblue);
+    color:var(--primary);
+}
+
+.formula {
+    background:#edf4f8;
+    border:1px solid #d5e4ec;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    font-size:18px;
+    direction:ltr;
+    font-weight:bold;
+    color:var(--primary);
+    margin:15px 0;
+}
+
+.calculator {
+    background:#f6f9fb;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+.calc-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.calc-grid label {
+    font-size:12px;
+    color:var(--muted);
+}
+
+.calc-grid input {
+    width:100%;
+    padding:10px;
+    border:1px solid var(--border);
+    border-radius:7px;
+    margin-top:5px;
+    font-size:16px;
+    text-align:center;
+}
+
+.calc-result {
+    font-size:17px;
+    font-weight:bold;
+    color:var(--green);
+    margin-top:15px;
+}
+
+.final-case {
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:17px;
+    margin:17px 0;
+    background:#fbfcfd;
+}
+
+.final-case textarea {
+    width:100%;
+    min-height:90px;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    resize:vertical;
+    font-size:14px;
+    line-height:1.8;
+    margin-top:12px;
+}
+
+.model-answer {
+    display:none;
+    background:var(--lightblue);
+    padding:13px;
+    border-radius:8px;
+    margin-top:12px;
+}
+
+.model-answer.show {
+    display:block;
+}
+
+.case-status {
+    font-size:12px;
+    color:var(--muted);
+}
+
+.summary-stat {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+
+.stat {
+    background:#f0f5f8;
+    padding:14px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.stat strong {
+    display:block;
+    color:var(--primary);
+    font-size:22px;
+}
+
+footer {
+    text-align:center;
+    padding:25px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.hidden {
+    display:none!important;
+}
+
+@media(max-width:650px) {
+    header h1 {font-size:20px}
+    .container {padding:0 10px}
+    .card {padding:16px}
+    .stage-nav {grid-template-columns:repeat(3,1fr)}
+    .segment {font-size:10px;padding:9px 2px}
+    .segment strong {font-size:11px}
+    .calc-grid {grid-template-columns:repeat(2,1fr)}
+    .summary-stat {grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+<span class="header-label">آموزش تعاملی اپیدمیولوژی | جلسه هفتم</span>
+<h1>شبیه‌ساز آموزشی مطالعات مورد ـ شاهدی</h1>
+<p>از طراحی مطالعه تا انتخاب شاهد، شناسایی سوگیری و تفسیر نسبت شانس</p>
+</div>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<div class="progress-box">
+<strong>پیشرفت یادگیری شما</strong>
+<span id="progressText">۰ از ۶ مرحله</span>
+</div>
+
+<div class="progress-track">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+
+<div class="stage-nav" id="stageNav">
+<button class="active" onclick="goStage(0)">۱. تعریف</button>
+<button onclick="goStage(1)">۲. جهت مطالعه</button>
+<button onclick="goStage(2)">۳. انتخاب گروه‌ها</button>
+<button onclick="goStage(3)">۴. مواجهه و همسان‌سازی</button>
+<button onclick="goStage(4)">۵. سوگیری‌ها</button>
+<button onclick="goStage(5)">۶. تحلیل OR</button>
+</div>
+
+</div>
+
+<!-- مرحله اول -->
+
+<section class="card stage active" id="stage0">
+
+<span class="stage-number">مرحله اول از شش</span>
+<h2>مرحله اول: مطالعه مورد ـ شاهدی چیست؟</h2>
+
+<div class="learning-box">
+<strong>هدف یادگیری:</strong>
+دانشجو بتواند مطالعه مورد ـ شاهدی را تعریف کند و تفاوت گروه مورد و شاهد را توضیح دهد.
+</div>
+
+<h3>مفهوم اصلی</h3>
+
+<p>
+مطالعه مورد ـ شاهدی یک مطالعه اپیدمیولوژیک تحلیلی و مشاهده‌ای است که در آن افراد ابتدا بر اساس وضعیت بیماری یا پیامد انتخاب می‌شوند.
+</p>
+
+<ul>
+<li><strong>گروه مورد (Case):</strong> افرادی که بیماری مورد مطالعه را دارند.</li>
+<li><strong>گروه شاهد (Control):</strong> افرادی که بیماری مورد مطالعه را ندارند.</li>
+</ul>
+
+<p>
+پس از انتخاب دو گروه، سابقه مواجهه با عامل خطر در گذشته بررسی و مقایسه می‌شود.
+</p>
+
+<div class="key-point">
+نکته مهم: در این مطالعه، مبنای انتخاب افراد «بیماری» است، نه مواجهه.
+</div>
+
+<div class="strip-title">نوار نمونه شماره ۱: منطق انتخاب افراد</div>
+
+<div class="strip" id="strip0">
+<div class="segment" data-part="case">
+<strong>گروه مورد</strong>
+بیماری دارد
+</div>
+<div class="segment" data-part="control">
+<strong>گروه شاهد</strong>
+بیماری ندارد
+</div>
+<div class="segment" data-part="exposure">
+<strong>بررسی مواجهه</strong>
+سابقه گذشته
+</div>
+<div class="segment" data-part="compare">
+<strong>مقایسه</strong>
+محاسبه OR
+</div>
+</div>
+
+<div class="strip-note">به ترتیب، انتخاب گروه‌ها و سپس بررسی سابقه مواجهه انجام می‌شود.</div>
+
+<div class="question-box">
+<h3>خودآزمایی مرحله اول</h3>
+<p>در مطالعه مورد ـ شاهدی، افراد ابتدا بر چه اساسی انتخاب می‌شوند؟</p>
+
+<div id="q0">
+<label class="option">
+<input type="radio" name="q0" value="a">
+الف) وضعیت مواجهه با عامل خطر
+</label>
+<label class="option">
+<input type="radio" name="q0" value="b">
+ب) وضعیت بیماری یا پیامد
+</label>
+<label class="option">
+<input type="radio" name="q0" value="c">
+ج) مدت پیگیری افراد
+</label>
+<label class="option">
+<input type="radio" name="q0" value="d">
+د) میزان بروز بیماری
+</label>
+</div>
+
+<button class="btn" onclick="checkAnswer(0,'b','case')">ثبت پاسخ</button>
+<div class="feedback" id="feedback0"></div>
+</div>
+
+<div class="btn-row">
+<button class="btn secondary" onclick="goStage(1)">مرحله بعد ←</button>
+</div>
+
+</section>
+
+<!-- مرحله دوم -->
+
+<section class="card stage" id="stage1">
+
+<span class="stage-number">مرحله دوم از شش</span>
+<h2>مرحله دوم: جهت مطالعه در طراحی مورد ـ شاهدی</h2>
+
+<div class="learning-box">
+<strong>هدف یادگیری:</strong>
+دانشجو بتواند جهت بررسی در مطالعه مورد ـ شاهدی را تشخیص دهد و آن را با مطالعه همگروهی مقایسه کند.
+</div>
+
+<h3>جهت حرکت در مطالعه</h3>
+
+<p>
+در مطالعه مورد ـ شاهدی، پژوهشگر ابتدا افراد بیمار و غیر بیمار را انتخاب می‌کند. سپس به گذشته برمی‌گردد تا سابقه مواجهه آن‌ها را بررسی کند.
+</p>
+
+<div class="key-point">
+جهت بررسی مواجهه: از وضعیت فعلی بیماری به سمت گذشته.
+</div>
+
+<div class="strip-title">نوار نمونه شماره ۲: مسیر زمانی مطالعه</div>
+
+<div class="strip" id="strip1">
+<div class="segment" data-part="present">
+<strong>انتخاب افراد</strong>
+بر اساس بیماری
+</div>
+<div class="segment" data-part="groups">
+<strong>تشکیل گروه‌ها</strong>
+مورد و شاهد
+</div>
+<div class="segment" data-part="past">
+<strong>بازگشت به گذشته</strong>
+بررسی مواجهه
+</div>
+<div class="segment" data-part="analysis">
+<strong>تحلیل</strong>
+مقایسه مواجهه
+</div>
+</div>
+
+<h3>مقایسه با مطالعه همگروهی</h3>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>ویژگی</th>
+<th>مورد ـ شاهدی</th>
+<th>همگروهی</th>
+</tr>
+<tr>
+<td>مبنای انتخاب</td>
+<td>بیماری</td>
+<td>مواجهه</td>
+</tr>
+<tr>
+<td>جهت بررسی</td>
+<td>از بیماری به گذشته مواجهه</td>
+<td>از مواجهه به پیامد</td>
+</tr>
+<tr>
+<td>شاخص اصلی</td>
+<td>OR</td>
+<td>RR یا شاخص‌های مناسب دیگر</td>
+</tr>
+</table>
+</div>
+
+<div class="question-box">
+<h3>خودآزمایی مرحله دوم</h3>
+<p>
+پژوهشگری ابتدا بیماران مبتلا به سرطان ریه و افراد بدون سرطان ریه را انتخاب می‌کند و سپس سابقه مصرف سیگار آن‌ها را بررسی می‌کند. این طراحی چه جهتی دارد؟
+</p>
+
+<div id="q1">
+<label class="option">
+<input type="radio" name="q1" value="a">
+الف) از مواجهه به بیماری
+</label>
+<label class="option">
+<input type="radio" name="q1" value="b">
+ب) از بیماری به بررسی مواجهه در گذشته
+</label>
+<label class="option">
+<input type="radio" name="q1" value="c">
+ج) پیگیری آینده‌نگر افراد مواجهه‌یافته
+</label>
+<label class="option">
+<input type="radio" name="q1" value="d">
+د) اندازه‌گیری هم‌زمان شیوع مواجهه و بیماری
+</label>
+</div>
+
+<button class="btn" onclick="checkAnswer(1,'b','past')">ثبت پاسخ</button>
+<div class="feedback" id="feedback1"></div>
+</div>
+
+<div class="btn-row">
+<button class="btn secondary" onclick="goStage(0)">→ مرحله قبل</button>
+<button class="btn" onclick="goStage(2)">مرحله بعد ←</button>
+</div>
+
+</section>
+
+<!-- مرحله سوم -->
+
+<section class="card stage" id="stage2">
+
+<span class="stage-number">مرحله سوم از شش</span>
+<h2>مرحله سوم: انتخاب موارد و شاهدها</h2>
+
+<div class="learning-box">
+<strong>هدف یادگیری:</strong>
+دانشجو بتواند موارد و شاهدها را تعریف کند و منبع مناسب انتخاب شاهد را تشخیص دهد.
+</div>
+
+<h3>انتخاب موارد (Cases)</h3>
+
+<p>
+موارد افرادی هستند که بیماری مورد مطالعه را دارند. انتخاب آن‌ها می‌تواند بر اساس موارد جدید (Incident) یا موارد موجود (Prevalent) باشد.
+</p>
+
+<p>
+در بسیاری از شرایط، انتخاب موارد جدید ارجح است؛ زیرا مشکلات مرتبط با بقای بیماران و برخی سوگیری‌ها را کاهش می‌دهد.
+</p>
+
+<h3>انتخاب شاهدها (Controls)</h3>
+
+<p>
+شاهدها باید فاقد بیماری مورد مطالعه باشند و از همان جمعیت مبدأ انتخاب شوند که موارد از آن به وجود آمده‌اند.
+</p>
+
+<div class="key-point">
+مهم‌ترین اصل انتخاب شاهد: اگر شاهد در زمان مناسب به بیماری مبتلا می‌شد، باید امکان ورود او به گروه موارد وجود می‌داشت.
+</div>
+
+<h3>منابع انتخاب شاهد</h3>
+
+<ul>
+<li>شاهدهای جمعیتی</li>
+<li>شاهدهای بیمارستانی</li>
+<li>همسایگان</li>
+<li>افراد انتخاب‌شده از ثبت‌های جمعیتی</li>
+</ul>
+
+<div class="strip-title">نوار نمونه شماره ۳: انتخاب گروه مورد و شاهد</div>
+
+<div class="strip" id="strip2">
+<div class="segment" data-part="population">
+<strong>جمعیت مبدأ</strong>
+جمعیت در معرض خطر
+</div>
+<div class="segment" data-part="cases">
+<strong>موارد</strong>
+بیماری دارند
+</div>
+<div class="segment" data-part="controls">
+<strong>شاهدها</strong>
+بیماری ندارند
+</div>
+<div class="segment" data-part="source">
+<strong>منبع مناسب</strong>
+همان جمعیت مبدأ
+</div>
+</div>
+
+<h3>مثال آموزشی</h3>
+
+<p>
+فرض کنید پژوهشگری قصد دارد عوامل خطر سرطان ریه را در یک شهر فرضی بررسی کند. او ۱۰۰ بیمار مبتلا به سرطان ریه را از مراکز تشخیصی انتخاب کرده است.
+</p>
+
+<p>
+برای انتخاب شاهد، بهتر است افرادی فاقد سرطان ریه از همان جمعیت مبدأ انتخاب شوند، نه افرادی که به دلیل بیماری‌های مرتبط با مصرف سیگار در بیمارستان بستری شده‌اند.
+</p>
+
+<div class="question-box">
+<h3>خودآزمایی مرحله سوم</h3>
+<p>
+در مطالعه‌ای درباره سرطان ریه، بهترین منبع انتخاب شاهد کدام است؟
+</p>
+
+<div id="q2">
+<label class="option">
+<input type="radio" name="q2" value="a">
+الف) بیماران بستری به علت بیماری‌های مرتبط با سیگار، بدون بررسی بیشتر
+</label>
+<label class="option">
+<input type="radio" name="q2" value="b">
+ب) افراد بدون سرطان ریه از همان جمعیت مبدأ موارد
+</label>
+<label class="option">
+<input type="radio" name="q2" value="c">
+ج) فقط افراد سیگاری
+</label>
+<label class="option">
+<input type="radio" name="q2" value="d">
+د) افراد سالم از هر شهر و جمعیتی
+</label>
+</div>
+
+<button class="btn" onclick="checkAnswer(2,'b','source')">ثبت پاسخ</button>
+<div class="feedback" id="feedback2"></div>
+</div>
+
+<div class="btn-row">
+<button class="btn secondary" onclick="goStage(1)">→ مرحله قبل</button>
+<button class="btn" onclick="goStage(3)">مرحله بعد ←</button>
+</div>
+
+</section>
+
+<!-- مرحله چهارم -->
+
+<section class="card stage" id="stage3">
+
+<span class="stage-number">مرحله چهارم از شش</span>
+<h2>مرحله چهارم: اندازه‌گیری مواجهه و همسان‌سازی</h2>
+
+<div class="learning-box">
+<strong>هدف یادگیری:</strong>
+دانشجو بتواند مواجهه را تعریف کند و هدف و محدودیت همسان‌سازی را توضیح دهد.
+</div>
+
+<h3>اندازه‌گیری مواجهه</h3>
+
+<p>
+پس از انتخاب موارد و شاهدها، پژوهشگر باید سابقه مواجهه را در هر دو گروه بررسی کند.
+</p>
+
+<p>در تعریف مواجهه باید به موارد زیر توجه شود:</p>
+
+<ul>
+<li>زمان شروع مواجهه</li>
+<li>مدت مواجهه</li>
+<li>شدت و مقدار مواجهه</li>
+<li>فاصله زمانی مواجهه تا بروز بیماری</li>
+<li>روش اندازه‌گیری و ثبت مواجهه</li>
+</ul>
+
+<p>منابع اندازه‌گیری می‌توانند شامل پرونده پزشکی، سوابق شغلی، پرسشنامه، مصاحبه و آزمایش‌های بیولوژیک باشند.</p>
+
+<h3>همسان‌سازی (Matching)</h3>
+
+<p>
+همسان‌سازی به معنای انتخاب شاهدهایی است که از نظر بعضی ویژگی‌های مشخص با موارد مشابه باشند.
+</p>
+
+<p>
+برای مثال، اگر سن عامل مخدوش‌کننده مهمی باشد، می‌توان شاهدها را از گروه‌های سنی مشابه موارد انتخاب کرد.
+</p>
+
+<div class="key-point">
+همسان‌سازی به معنی حذف کامل مخدوش‌کنندگی یا سوگیری نیست. همچنین در طراحی همسان‌سازی‌شده، تحلیل آماری باید با روش همسان‌سازی هماهنگ باشد.
+</div>
+
+<div class="strip-title">نوار نمونه شماره ۴: مراحل اندازه‌گیری مواجهه</div>
+
+<div class="strip" id="strip3">
+<div class="segment" data-part="time">
+<strong>زمان</strong>
+شروع مواجهه
+</div>
+<div class="segment" data-part="duration">
+<strong>مدت</strong>
+طول مواجهه
+</div>
+<div class="segment" data-part="intensity">
+<strong>شدت</strong>
+مقدار مواجهه
+</div>
+<div class="segment" data-part="method">
+<strong>اندازه‌گیری</strong>
+پرونده یا مصاحبه
+</div>
+<div class="segment" data-part="matching">
+<strong>همسان‌سازی</strong>
+کنترل برخی عوامل
+</div>
+</div>
+
+<div class="question-box">
+<h3>خودآزمایی مرحله چهارم</h3>
+
+<p>
+پژوهشگری برای کنترل اثر مخدوش‌کننده سن، شاهدها را با موارد از نظر گروه سنی مشابه انتخاب می‌کند. این اقدام چه نام دارد؟
+</p>
+
+<div id="q3">
+<label class="option">
+<input type="radio" name="q3" value="a">
+الف) تصادفی‌سازی
+</label>
+<label class="option">
+<input type="radio" name="q3" value="b">
+ب) همسان‌سازی
+</label>
+<label class="option">
+<input type="radio" name="q3" value="c">
+ج) کورسازی
+</label>
+<label class="option">
+<input type="radio" name="q3" value="d">
+د) نمونه‌گیری خوشه‌ای
+</label>
+</div>
+
+<button class="btn" onclick="checkAnswer(3,'b','matching')">ثبت پاسخ</button>
+<div class="feedback" id="feedback3"></div>
+</div>
+
+<div class="btn-row">
+<button class="btn secondary" onclick="goStage(2)">→ مرحله قبل</button>
+<button class="btn" onclick="goStage(4)">مرحله بعد ←</button>
+</div>
+
+</section>
+
+<!-- مرحله پنجم -->
+
+<section class="card stage" id="stage4">
+
+<span class="stage-number">مرحله پنجم از شش</span>
+<h2>مرحله پنجم: سوگیری‌ها در مطالعات مورد ـ شاهدی</h2>
+
+<div class="learning-box">
+<strong>هدف یادگیری:</strong>
+دانشجو بتواند سوگیری انتخاب و سوگیری یادآوری را تشخیص دهد.
+</div>
+
+<h3>۱. سوگیری انتخاب (Selection Bias)</h3>
+
+<p>
+زمانی رخ می‌دهد که انتخاب موارد یا شاهدها به شکلی انجام شود که مقایسه مواجهه بین دو گروه را مخدوش کند.
+</p>
+
+<p>
+مثال: انتخاب شاهدها از بخش بیمارستانی که بیماری‌های آن با مواجهه مورد بررسی ارتباط دارند.
+</p>
+
+<h3>۲. سوگیری یادآوری (Recall Bias)</h3>
+
+<p>
+زمانی رخ می‌دهد که افراد بیمار و غیر بیمار سابقه مواجهه گذشته را با دقت یا جزئیات متفاوتی به خاطر آورند یا گزارش کنند.
+</p>
+
+<p>
+مثال: بیماران مبتلا به یک بیماری ممکن است درباره مصرف دارو در گذشته اطلاعات بیشتری ارائه دهند؛ زیرا بیشتر درباره علت بیماری خود فکر کرده‌اند.
+</p>
+
+<h3>۳. مشکلات همسان‌سازی</h3>
+
+<p>
+همسان‌سازی بیش از حد ممکن است انتخاب شاهد مناسب را دشوار کند. همچنین اگر تحلیل آماری با طراحی همسان‌سازی‌شده هماهنگ نباشد، نتایج ممکن است نادرست برآورد شوند.
+</p>
+
+<div class="strip-title">نوار نمونه شماره ۵: شناسایی سوگیری</div>
+
+<div class="strip" id="strip4">
+<div class="segment" data-part="selection">
+<strong>انتخاب شاهد</strong>
+منبع نامناسب
+</div>
+<div class="segment" data-part="recall">
+<strong>یادآوری</strong>
+گزارش متفاوت
+</div>
+<div class="segment" data-part="matching">
+<strong>همسان‌سازی</strong>
+مشکلات طراحی
+</div>
+<div class="segment" data-part="result">
+<strong>پیامد</strong>
+نتیجه مخدوش
+</div>
+</div>
+
+<div class="key-point">
+نکته کلیدی: سوگیری انتخاب به نحوه ورود افراد به مطالعه مربوط است؛ سوگیری یادآوری به تفاوت در به خاطر آوردن یا گزارش مواجهه گذشته مربوط می‌شود.
+</div>
+
+<div class="question-box">
+<h3>خودآزمایی مرحله پنجم</h3>
+
+<p>
+در یک مطالعه مورد ـ شاهدی، بیماران مبتلا به بیماری درباره سابقه مصرف دارو با جزئیات بیشتری نسبت به افراد شاهد گزارش می‌دهند. این وضعیت بیشتر نشان‌دهنده کدام سوگیری است؟
+</p>
+
+<div id="q4">
+<label class="option">
+<input type="radio" name="q4" value="a">
+الف) سوگیری انتخاب
+</label>
+<label class="option">
+<input type="radio" name="q4" value="b">
+ب) سوگیری یادآوری
+</label>
+<label class="option">
+<input type="radio" name="q4" value="c">
+ج) سوگیری انتشار
+</label>
+<label class="option">
+<input type="radio" name="q4" value="d">
+د) خطای تصادفی
+</label>
+</div>
+
+<button class="btn" onclick="checkAnswer(4,'b','recall')">ثبت پاسخ</button>
+<div class="feedback" id="feedback4"></div>
+</div>
+
+<div class="btn-row">
+<button class="btn secondary" onclick="goStage(3)">→ مرحله قبل</button>
+<button class="btn" onclick="goStage(5)">مرحله بعد ←</button>
+</div>
+
+</section>
+
+<!-- مرحله ششم -->
+
+<section class="card stage" id="stage5">
+
+<span class="stage-number">مرحله ششم از شش</span>
+<h2>مرحله ششم: جدول ۲×۲ و محاسبه نسبت شانس</h2>
+
+<div class="learning-box">
+<strong>هدف یادگیری:</strong>
+دانشجو بتواند جدول ۲×۲ را تشکیل دهد، OR را محاسبه کند و آن را تفسیر کند.
+</div>
+
+<h3>جدول توافقی ۲×۲</h3>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>وضعیت مواجهه</th>
+<th>مورد</th>
+<th>شاهد</th>
+</tr>
+<tr>
+<td>مواجهه دارد</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr>
+<td>مواجهه ندارد</td>
+<td>c</td>
+<td>d</td>
+</tr>
+</table>
+</div>
+
+<div class="formula">
+OR = (a × d) / (b × c)
+</div>
+
+<h3>مثال فرضی: مصرف سیگار و سرطان ریه</h3>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>سابقه سیگار</th>
+<th>موارد</th>
+<th>شاهدها</th>
+</tr>
+<tr>
+<td>مصرف‌کننده</td>
+<td>۸۰</td>
+<td>۴۰</td>
+</tr>
+<tr>
+<td>غیرمصرف‌کننده</td>
+<td>۲۰</td>
+<td>۶۰</td>
+</tr>
+</table>
+</div>
+
+<p>
+با جایگذاری اعداد در فرمول:
+</p>
+
+<div class="formula">
+OR = (80 × 60) / (40 × 20) = 6
+</div>
+
+<h3>تفسیر OR</h3>
+
+<ul>
+<li><strong>OR = 1:</strong> شواهدی از ارتباط مشاهده نشده است.</li>
+<li><strong>OR بیشتر از 1:</strong> ارتباط مثبت بین مواجهه و بیماری.</li>
+<li><strong>OR کمتر از 1:</strong> ارتباط منفی یا احتمالی محافظتی.</li>
+</ul>
+
+<div class="key-point">
+OR به‌تنهایی رابطه علّی را اثبات نمی‌کند. همچنین OR همیشه معادل RR نیست؛ در بیماری‌های نادر می‌تواند تقریب مناسبی از RR باشد.
+</div>
+
+<div class="strip-title">نوار نمونه شماره ۶: مسیر تحلیل</div>
+
+<div class="strip" id="strip5">
+<div class="segment" data-part="table">
+<strong>جدول ۲×۲</strong>
+تعیین a,b,c,d
+</div>
+<div class="segment" data-part="formula">
+<strong>فرمول</strong>
+ضرب متقاطع
+</div>
+<div class="segment" data-part="or">
+<strong>محاسبه OR</strong>
+نسبت شانس
+</div>
+<div class="segment" data-part="interpret">
+<strong>تفسیر</strong>
+مثبت، منفی یا خنثی
+</div>
+</div>
+
+<h3>ماشین‌حساب تمرینی OR</h3>
+
+<p class="small">اعداد را در خانه‌های زیر وارد کنید تا نسبت شانس محاسبه شود.</p>
+
+<div class="calculator">
+
+<div class="calc-grid">
+<label>
+تعداد a
+<input type="number" id="a" value="80" min="0">
+</label>
+<label>
+تعداد b
+<input type="number" id="b" value="40" min="0">
+</label>
+<label>
+تعداد c
+<input type="number" id="c" value="20" min="0">
+</label>
+<label>
+تعداد d
+<input type="number" id="d" value="60" min="0">
+</label>
+</div>
+
+<button class="btn" onclick="calculateOR()" style="margin-top:15px">محاسبه OR</button>
+<div class="calc-result" id="orResult">OR = 6</div>
+
+</div>
+
+<div class="question-box">
+<h3>خودآزمایی مرحله ششم</h3>
+
+<p>
+در یک مطالعه فرضی، تعداد افراد مواجهه‌یافته در گروه مورد ۸۰ نفر و افراد بدون مواجهه ۲۰ نفر است. در گروه شاهد، این اعداد به‌ترتیب ۴۰ و ۶۰ نفر هستند. مقدار OR چقدر است؟
+</p>
+
+<div id="q5">
+<label class="option">
+<input type="radio" name="q5" value="a">
+الف) ۲
+</label>
+<label class="option">
+<input type="radio" name="q5" value="b">
+ب) ۴
+</label>
+<label class="option">
+<input type="radio" name="q5" value="c">
+ج) ۶
+</label>
+<label class="option">
+<input type="radio" name="q5" value="d">
+د) ۸
+</label>
+</div>
+
+<button class="btn" onclick="checkAnswer(5,'c','or')">ثبت پاسخ</button>
+<div class="feedback" id="feedback5"></div>
+</div>
+
+<div class="btn-row">
+<button class="btn secondary" onclick="goStage(4)">→ مرحله قبل</button>
+<button class="btn green" onclick="showFinal()">ورود به آزمون نهایی</button>
+</div>
+
+</section>
+
+<!-- آزمون نهایی -->
+
+<section class="card hidden" id="finalSection">
+
+<span class="stage-number">ارزشیابی نهایی</span>
+<h2>اکنون شما پژوهشگر هستید!</h2>
+
+<p>
+در این بخش پنج سناریوی فرضی به شما ارائه می‌شود. بدون مراجعه به پاسخ‌های مراحل قبل، هر نوار را از ابتدا تا انتها تفسیر کنید.
+</p>
+
+<div class="key-point">
+در هر تمرین، ابتدا نوع مطالعه و منطق انتخاب گروه‌ها را مشخص کنید؛ سپس مواجهه، مقایسه و تفسیر یافته‌ها را توضیح دهید.
+</div>
+
+<!-- تمرین اول -->
+
+<div class="final-case" id="case0">
+
+<h3>تمرین اول: مصرف سیگار و سرطان ریه</h3>
+
+<p>
+پژوهشگری در یک شهر فرضی، ۱۰۰ بیمار مبتلا به سرطان ریه و ۱۰۰ فرد بدون سرطان ریه را انتخاب کرده است.
+</p>
+
+<div class="strip">
+<div class="segment" data-final="case0">
+<strong>۱. موارد</strong>
+۱۰۰ بیمار
+</div>
+<div class="segment" data-final="case0">
+<strong>۲. شاهدها</strong>
+۱۰۰ فرد غیرمبتلا
+</div>
+<div class="segment" data-final="case0">
+<strong>۳. مواجهه</strong>
+سابقه سیگار
+</div>
+<div class="segment" data-final="case0">
+<strong>۴. تحلیل</strong>
+OR
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>سابقه سیگار</th>
+<th>موارد</th>
+<th>شاهدها</th>
+</tr>
+<tr>
+<td>دارد</td>
+<td>۸۰</td>
+<td>۴۰</td>
+</tr>
+<tr>
+<td>ندارد</td>
+<td>۲۰</td>
+<td>۶۰</td>
+</tr>
+</table>
+</div>
+
+<p><strong>پرسش:</strong> این نوار را از انتخاب افراد تا تفسیر ارتباط توضیح دهید.</p>
+
+<textarea id="answer0" placeholder="تفسیر خود را اینجا بنویسید..."></textarea>
+
+<button class="btn" onclick="revealAnswer(0)">مشاهده پاسخ پیشنهادی</button>
+
+<div class="model-answer" id="model0">
+<strong>پاسخ پیشنهادی:</strong>
+این مطالعه مورد ـ شاهدی است؛ زیرا افراد بر اساس وضعیت سرطان ریه انتخاب شده‌اند. گروه مورد شامل بیماران و گروه شاهد شامل افراد فاقد سرطان است. سابقه مصرف سیگار در گذشته بررسی شده است.
+<br><br>
+OR = (۸۰×۶۰)/(۴۰×۲۰) = ۶
+<br><br>
+شانس مواجهه با سیگار در گروه موارد شش برابر گروه شاهد است. این یافته با ارتباط مثبت بین مصرف سیگار و سرطان ریه سازگار است، اما به‌تنهایی علیت را اثبات نمی‌کند.
+</div>
+
+</div>
+
+<!-- تمرین دوم -->
+
+<div class="final-case" id="case1">
+
+<h3>تمرین دوم: عفونت HPV و سرطان دهانه رحم</h3>
+
+<p>
+در یک سناریوی فرضی، ۱۰۰ زن مبتلا به سرطان دهانه رحم و ۱۰۰ زن بدون سرطان از یک جمعیت مبدأ انتخاب شده‌اند.
+</p>
+
+<div class="strip">
+<div class="segment" data-final="case1">
+<strong>۱. موارد</strong>
+سرطان دارند
+</div>
+<div class="segment" data-final="case1">
+<strong>۲. شاهدها</strong>
+سرطان ندارند
+</div>
+<div class="segment" data-final="case1">
+<strong>۳. مواجهه</strong>
+سابقه HPV
+</div>
+<div class="segment" data-final="case1">
+<strong>۴. مقایسه</strong>
+OR
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>سابقه HPV</th>
+<th>موارد</th>
+<th>شاهدها</th>
+</tr>
+<tr>
+<td>مثبت</td>
+<td>۷۲</td>
+<td>۳۶</td>
+</tr>
+<tr>
+<td>منفی</td>
+<td>۲۸</td>
+<td>۶۴</td>
+</tr>
+</table>
+</div>
+
+<p><strong>پرسش:</strong> چرا این طراحی مورد ـ شاهدی است و یافته را چگونه تفسیر می‌کنید؟</p>
+
+<textarea id="answer1" placeholder="تفسیر خود را اینجا بنویسید..."></textarea>
+
+<button class="btn" onclick="revealAnswer(1)">مشاهده پاسخ پیشنهادی</button>
+
+<div class="model-answer" id="model1">
+<strong>پاسخ پیشنهادی:</strong>
+انتخاب افراد بر اساس وجود یا عدم وجود سرطان دهانه رحم انجام شده و سپس سابقه مواجهه با HPV بررسی شده است؛ بنابراین طراحی مورد ـ شاهدی است.
+<br><br>
+OR = (۷۲×۶۴)/(۳۶×۲۸) = ۴٫۵۷
+<br><br>
+شانس سابقه HPV در موارد حدود ۴٫۵۷ برابر شاهدها است. این یافته با ارتباط مثبت سازگار است. زمان انجام آزمایش، نوع HPV و عوامل مخدوش‌کننده باید در نظر گرفته شوند.
+</div>
+
+</div>
+
+<!-- تمرین سوم -->
+
+<div class="final-case" id="case2">
+
+<h3>تمرین سوم: مواجهه شغلی با آفت‌کش‌ها و لوسمی</h3>
+
+<p>
+در یک مطالعه فرضی، ۶۰ بیمار مبتلا به لوسمی و ۶۰ فرد بدون لوسمی انتخاب شده‌اند. سابقه تماس شغلی با آفت‌کش‌ها بررسی می‌شود.
+</p>
+
+<div class="strip">
+<div class="segment" data-final="case2">
+<strong>۱. موارد</strong>
+۶۰ بیمار
+</div>
+<div class="segment" data-final="case2">
+<strong>۲. شاهدها</strong>
+۶۰ غیرمبتلا
+</div>
+<div class="segment" data-final="case2">
+<strong>۳. مواجهه</strong>
+آفت‌کش‌ها
+</div>
+<div class="segment" data-final="case2">
+<strong>۴. تحلیل</strong>
+OR
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>مواجهه شغلی</th>
+<th>موارد</th>
+<th>شاهدها</th>
+</tr>
+<tr>
+<td>دارد</td>
+<td>۳۶</td>
+<td>۱۸</td>
+</tr>
+<tr>
+<td>ندارد</td>
+<td>۲۴</td>
+<td>۴۲</td>
+</tr>
+</table>
+</div>
+
+<p><strong>پرسش:</strong> نوع مطالعه، مواجهه، و جهت ارتباط را تفسیر کنید.</p>
+
+<textarea id="answer2" placeholder="تفسیر خود را اینجا بنویسید..."></textarea>
+
+<button class="btn" onclick="revealAnswer(2)">مشاهده پاسخ پیشنهادی</button>
+
+<div class="model-answer" id="model2">
+<strong>پاسخ پیشنهادی:</strong>
+مطالعه مورد ـ شاهدی است. موارد مبتلا به لوسمی و شاهدها افراد فاقد لوسمی هستند. مواجهه مورد بررسی، تماس شغلی با آفت‌کش‌ها است.
+<br><br>
+OR = (۳۶×۴۲)/(۱۸×۲۴) = ۳٫۵
+<br><br>
+شانس مواجهه شغلی در موارد ۳٫۵ برابر شاهدها است. سن، مدت اشتغال و سایر مواجهه‌های شغلی باید بررسی شوند.
+</div>
+
+</div>
+
+<!-- تمرین چهارم -->
+
+<div class="final-case" id="case3">
+
+<h3>تمرین چهارم: رعایت بهداشت دست و گاستروانتریت</h3>
+
+<p>
+در یک سناریوی فرضی، ۱۰۰ فرد مبتلا به گاستروانتریت و ۱۰۰ فرد فاقد بیماری انتخاب شده‌اند. سابقه رعایت بهداشت دست بررسی شده است.
+</p>
+
+<div class="strip">
+<div class="segment" data-final="case3">
+<strong>۱. موارد</strong>
+بیماران
+</div>
+<div class="segment" data-final="case3">
+<strong>۲. شاهدها</strong>
+غیربیماران
+</div>
+<div class="segment" data-final="case3">
+<strong>۳. مواجهه</strong>
+بهداشت نامناسب
+</div>
+<div class="segment" data-final="case3">
+<strong>۴. تحلیل</strong>
+OR
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>بهداشت نامناسب دست</th>
+<th>موارد</th>
+<th>شاهدها</th>
+</tr>
+<tr>
+<td>بله</td>
+<td>۶۰</td>
+<td>۳۰</td>
+</tr>
+<tr>
+<td>خیر</td>
+<td>۴۰</td>
+<td>۷۰</td>
+</tr>
+</table>
+</div>
+
+<p><strong>پرسش:</strong> علاوه بر تفسیر OR، یک سوگیری احتمالی را مشخص کنید.</p>
+
+<textarea id="answer3" placeholder="تفسیر خود را اینجا بنویسید..."></textarea>
+
+<button class="btn" onclick="revealAnswer(3)">مشاهده پاسخ پیشنهادی</button>
+
+<div class="model-answer" id="model3">
+<strong>پاسخ پیشنهادی:</strong>
+مطالعه مورد ـ شاهدی است و مواجهه، رعایت نکردن بهداشت دست پیش از بیماری است.
+<br><br>
+OR = (۶۰×۷۰)/(۳۰×۴۰) = ۳٫۵
+<br><br>
+شانس گزارش بهداشت نامناسب در موارد ۳٫۵ برابر شاهدها است. سوگیری یادآوری می‌تواند رخ دهد؛ زیرا بیماران ممکن است رفتارهای گذشته خود را متفاوت از شاهدها به خاطر آورند.
+</div>
+
+</div>
+
+<!-- تمرین پنجم -->
+
+<div class="final-case" id="case4">
+
+<h3>تمرین پنجم: واکسیناسیون و بیماری عفونی</h3>
+
+<p>
+در یک مطالعه فرضی، ۱۰۰ فرد مبتلا به یک بیماری عفونی و ۱۰۰ فرد فاقد بیماری انتخاب شده‌اند. سابقه واکسیناسیون بررسی شده است.
+</p>
+
+<div class="strip">
+<div class="segment" data-final="case4">
+<strong>۱. موارد</strong>
+۱۰۰ بیمار
+</div>
+<div class="segment" data-final="case4">
+<strong>۲. شاهدها</strong>
+۱۰۰ غیرمبتلا
+</div>
+<div class="segment" data-final="case4">
+<strong>۳. مواجهه</strong>
+واکسیناسیون
+</div>
+<div class="segment" data-final="case4">
+<strong>۴. تحلیل</strong>
+OR
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+<tr>
+<th>وضعیت واکسیناسیون</th>
+<th>موارد</th>
+<th>شاهدها</th>
+</tr>
+<tr>
+<td>واکسینه‌شده</td>
+<td>۲۰</td>
+<td>۵۰</td>
+</tr>
+<tr>
+<td>واکسینه‌نشده</td>
+<td>۸۰</td>
+<td>۵۰</td>
+</tr>
+</table>
+</div>
+
+<p><strong>پرسش:</strong> مقدار OR را محاسبه کنید و نقش احتمالی واکسیناسیون را تفسیر کنید.</p>
+
+<textarea id="answer4" placeholder="تفسیر خود را اینجا بنویسید..."></textarea>
+
+<button class="btn" onclick="revealAnswer(4)">مشاهده پاسخ پیشنهادی</button>
+
+<div class="model-answer" id="model4">
+<strong>پاسخ پیشنهادی:</strong>
+این مطالعه مورد ـ شاهدی است. موارد افراد مبتلا و شاهدها افراد فاقد بیماری هستند. مواجهه مورد بررسی، دریافت واکسن پیش از ابتلا است.
+<br><br>
+OR = (۲۰×۵۰)/(۵۰×۸۰) = ۰٫۲۵
+<br><br>
+شانس واکسیناسیون در گروه موارد یک‌چهارم گروه شاهدها است. این یافته با نقش محافظتی احتمالی واکسیناسیون سازگار است، اما به‌تنهایی اثربخشی واکسن را اثبات نمی‌کند.
+</div>
+
+</div>
+
+<div class="card">
+<h3>ثبت پایان تمرین‌ها</h3>
+<p>
+پس از نوشتن تفسیر هر پنج سناریو و مشاهده پاسخ‌های پیشنهادی، می‌توانید پایان تمرین‌ها را ثبت کنید.
+</p>
+
+<button class="btn green" onclick="finishCourse()">ثبت تکمیل دوره آموزشی</button>
+
+<div id="completion" class="feedback good">
+<strong>آفرین! شما شش مرحله آموزشی و پنج سناریوی پایانی را تکمیل کردید.</strong>
+پیشرفت و پاسخ‌های شما در مرورگر ذخیره شده‌اند.
+</div>
+
+<div class="summary-stat">
+<div class="stat">
+<strong id="scoreStat">۰</strong>
+<small>پاسخ صحیح از ۶ سؤال</small>
+</div>
+<div class="stat">
+<strong id="completedStat">۰</strong>
+<small>مرحله تکمیل‌شده</small>
+</div>
+<div class="stat">
+<strong id="finalStat">۰/۵</strong>
+<small>تمرین پایانی بررسی‌شده</small>
+</div>
+</div>
+
+</div>
+
+<div class="btn-row">
+<button class="btn secondary" onclick="goStage(0)">بازگشت به درس</button>
+<button class="btn secondary" onclick="resetCourse()">شروع مجدد دوره</button>
+</div>
+
+</section>
+
+</div>
+
+<footer>
+شبیه‌ساز آموزشی اصول اپیدمیولوژی | مطالعات مورد ـ شاهدی
+<br>
+تمام سناریوها، داده‌ها و مثال‌های عددی این شبیه‌ساز فرضی و صرفاً آموزشی هستند.
+</footer>
+
+<script>
+
+/* ===============================
+   مدیریت وضعیت و ذخیره پیشرفت
+================================ */
+
+const STORAGE_KEY = "case_control_learning_v1";
+
+let state = {
+    answers:{},
+    completed:{},
+    revealed:{},
+    notes:{},
+    finished:false
+};
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if(saved) {
+            state = {...state,...JSON.parse(saved)};
+        }
+    } catch(e) {
+        console.log("ذخیره قبلی قابل بازیابی نیست.");
+    }
+}
+
+function saveState() {
+    try {
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+    } catch(e) {
+        console.log("امکان ذخیره در این مرورگر وجود ندارد.");
+    }
+}
+
+loadState();
+
+/* ===============================
+   اعداد فارسی
+================================ */
+
+function faNumber(n) {
+    return String(n).replace(/\d/g,d=>"۰۱۲۳۴۵۶۷۸۹"[d]);
+}
+
+/* ===============================
+   مدیریت مراحل
+================================ */
+
+let currentStage = 0;
+
+function goStage(n) {
+    currentStage = n;
+
+    document.querySelectorAll(".stage").forEach((el,i)=>{
+        el.classList.toggle("active",i===n);
+    });
+
+    document.querySelectorAll("#stageNav button").forEach((btn,i)=>{
+        btn.classList.toggle("active",i===n);
+        btn.classList.toggle("done",!!state.completed[i]);
+    });
+
+    document.getElementById("finalSection").classList.add("hidden");
+
+    updateProgress();
+
+    window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateProgress() {
+    const done = Object.keys(state.completed).filter(k=>state.completed[k]).length;
+
+    const percent = (done/6)*100;
+
+    document.getElementById("progressFill").style.width=percent+"%";
+
+    document.getElementById("progressText").textContent =
+        faNumber(done)+" از ۶ مرحله";
+
+    document.getElementById("scoreStat").textContent =
+        faNumber(Object.keys(state.answers).filter(k=>state.answers[k]).length);
+
+    document.getElementById("completedStat").textContent =
+        faNumber(done);
+}
+
+/* ===============================
+   پرسش‌ها و بازخورد
+================================ */
+
+const explanations = {
+    0:{
+        correct:"درست است. در مطالعه مورد ـ شاهدی، افراد ابتدا بر اساس وضعیت بیماری انتخاب می‌شوند و سپس سابقه مواجهه آن‌ها بررسی می‌شود.",
+        wrong:"این پاسخ صحیح نیست. به یاد داشته باشید که مبنای انتخاب افراد در مطالعه مورد ـ شاهدی، وضعیت بیماری است؛ نه وضعیت مواجهه.",
+        answer:"گزینه ب: وضعیت بیماری یا پیامد",
+        part:"case"
+    },
+    1:{
+        correct:"آفرین! ابتدا افراد مبتلا و غیرمبتلا انتخاب می‌شوند و سپس پژوهشگر به گذشته برمی‌گردد تا سابقه مواجهه را بررسی کند.",
+        wrong:"جهت مطالعه را با مطالعه همگروهی اشتباه نگیرید. در مورد ـ شاهدی، از بیماری شروع می‌کنیم و مواجهه گذشته را بررسی می‌کنیم.",
+        answer:"گزینه ب: از بیماری به بررسی مواجهه در گذشته",
+        part:"past"
+    },
+    2:{
+        correct:"درست است. شاهدها باید از همان جمعیت مبدأ موارد انتخاب شوند تا مقایسه مواجهه معتبر باشد.",
+        wrong:"هر فرد سالمی لزوماً شاهد مناسب نیست. شاهد باید نماینده جمعیتی باشد که موارد از آن انتخاب شده‌اند.",
+        answer:"گزینه ب: افراد بدون بیماری از همان جمعیت مبدأ",
+        part:"source"
+    },
+    3:{
+        correct:"درست است. انتخاب شاهدهایی با ویژگی مشابه موارد از نظر متغیر مشخص، همسان‌سازی نام دارد.",
+        wrong:"این اقدام همسان‌سازی است. همسان‌سازی می‌تواند قابلیت مقایسه را افزایش دهد، اما به معنی حذف کامل مخدوش‌کنندگی نیست.",
+        answer:"گزینه ب: همسان‌سازی",
+        part:"matching"
+    },
+    4:{
+        correct:"درست است. تفاوت در به خاطر آوردن یا گزارش مواجهه گذشته در دو گروه، سوگیری یادآوری نام دارد.",
+        wrong:"در این سناریو، تفاوت در انتخاب افراد مطرح نیست؛ بلکه بیماران و شاهدها مواجهه گذشته را متفاوت گزارش می‌کنند.",
+        answer:"گزینه ب: سوگیری یادآوری",
+        part:"recall"
+    },
+    5:{
+        correct:"آفرین! محاسبه صحیح است: (۸۰×۶۰)/(۴۰×۲۰) = ۶.",
+        wrong:"فرمول را به خاطر بسپارید: حاصل‌ضرب قطر اصلی تقسیم بر حاصل‌ضرب قطر دیگر. OR = (۸۰×۶۰)/(۴۰×۲۰) = ۶.",
+        answer:"گزینه ج: ۶",
+        part:"or"
+    }
+};
+
+function checkAnswer(index,correct,part) {
+
+    const selected = document.querySelector(
+        'input[name="q'+index+'"]:checked'
+    );
+
+    const feedback = document.getElementById("feedback"+index);
+
+    if(!selected) {
+        feedback.className="feedback show bad";
+        feedback.innerHTML="لطفاً ابتدا یکی از گزینه‌ها را انتخاب کنید.";
+        return;
+    }
+
+    const isCorrect = selected.value===correct;
+
+    state.answers[index]=isCorrect;
+    state.completed[index]=true;
+
+    saveState();
+
+    const explanation=explanations[index];
+
+    feedback.className="feedback show "+(isCorrect?"good":"bad");
+
+    feedback.innerHTML=
+        "<strong>"+(isCorrect?"✓ پاسخ صحیح":"✗ پاسخ نادرست")+"</strong>"+
+        (isCorrect?explanation.correct:explanation.wrong)+
+        "<br><strong>پاسخ صحیح: "+explanation.answer+"</strong>";
+
+    highlightStrip(index,part,isCorrect);
+
+    updateProgress();
+
+    const stageButton=document.querySelectorAll("#stageNav button")[index];
+    stageButton.classList.add("done");
+}
+
+function highlightStrip(index,part,isCorrect) {
+
+    const strip=document.getElementById("strip"+index);
+
+    if(!strip) return;
+
+    strip.querySelectorAll(".segment").forEach(el=>{
+        el.classList.remove("highlight","correct-highlight","wrong-highlight");
+    });
+
+    const target=strip.querySelector('[data-part="'+part+'"]');
+
+    if(target) {
+        target.classList.add(isCorrect?"correct-highlight":"wrong-highlight");
+    }
+}
+
+/* ===============================
+   بازیابی پاسخ‌های قبلی
+================================ */
+
+function restoreAnswers() {
+
+    for(let i=0;i<6;i++) {
+
+        if(state.answers[i]===undefined) continue;
+
+        const feedback=document.getElementById("feedback"+i);
+        const explanation=explanations[i];
+
+        feedback.className="feedback show "+(state.answers[i]?"good":"bad");
+
+        feedback.innerHTML=
+            "<strong>"+(state.answers[i]?"✓ پاسخ صحیح":"✗ پاسخ نادرست")+"</strong>"+
+            (state.answers[i]?explanation.correct:explanation.wrong)+
+            "<br><strong>پاسخ صحیح: "+explanation.answer+"</strong>";
+
+        const part=explanation.part;
+        const target=document.querySelector(
+            '#strip'+i+' [data-part="'+part+'"]'
+        );
+
+        if(target) {
+            target.classList.add(
+                state.answers[i]?"correct-highlight":"wrong-highlight"
+            );
+        }
+    }
+
+    for(let i=0;i<5;i++) {
+
+        const area=document.getElementById("answer"+i);
+
+        if(state.notes[i]) area.value=state.notes[i];
+
+        if(state.revealed[i]) {
+            document.getElementById("model"+i).classList.add("show");
+        }
+    }
+
+    if(state.finished) {
+        document.getElementById("completion").classList.add("show");
+    }
+}
+
+/* ===============================
+   محاسبه OR
+================================ */
+
+function calculateOR() {
+
+    const a=Number(document.getElementById("a").value);
+    const b=Number(document.getElementById("b").value);
+    const c=Number(document.getElementById("c").value);
+    const d=Number(document.getElementById("d").value);
+
+    const result=document.getElementById("orResult");
+
+    if([a,b,c,d].some(v=>!Number.isFinite(v)||v<0)) {
+        result.textContent="لطفاً اعداد معتبر و غیرمنفی وارد کنید.";
+        return;
+    }
+
+    if(b*c===0) {
+        result.textContent="به دلیل صفر بودن مخرج، OR به شکل معمول قابل محاسبه نیست.";
+        return;
+    }
+
+    const or=(a*d)/(b*c);
+
+    let interpretation="";
+
+    if(or===1) {
+        interpretation="شواهدی از ارتباط مشاهده نشده است.";
+    } else if(or>1) {
+        interpretation="ارتباط مثبت مشاهده می‌شود؛ شانس مواجهه در گروه موارد بیشتر است.";
+    } else {
+        interpretation="ارتباط منفی مشاهده می‌شود؛ شانس مواجهه در گروه موارد کمتر است.";
+    }
+
+    result.innerHTML=
+        "OR = "+or.toFixed(2)+
+        "<br><span style='font-size:13px;font-weight:normal'>"+
+        interpretation+"</span>";
+}
+
+/* ===============================
+   آزمون نهایی پنج سناریو
+================================ */
+
+function showFinal() {
+
+    document.querySelectorAll(".stage").forEach(el=>{
+        el.classList.remove("active");
+    });
+
+    document.getElementById("finalSection").classList.remove("hidden");
+
+    window.scrollTo({top:0,behavior:"smooth"});
+
+    updateFinalStats();
+}
+
+function revealAnswer(index) {
+
+    const area=document.getElementById("answer"+index);
+
+    state.notes[index]=area.value;
+    state.revealed[index]=true;
+
+    saveState();
+
+    document.getElementById("model"+index).classList.add("show");
+
+    const strip=document.querySelectorAll(
+        '#case'+index+' .segment'
+    );
+
+    strip.forEach(el=>{
+        el.classList.add("highlight");
+    });
+
+    updateFinalStats();
+}
+
+function updateFinalStats() {
+
+    const count=Object.keys(state.revealed).filter(k=>state.revealed[k]).length;
+
+    document.getElementById("finalStat").textContent=
+        faNumber(count)+"/۵";
+}
+
+function finishCourse() {
+
+    const count=Object.keys(state.revealed).filter(k=>state.revealed[k]).length;
+
+    if(count<5) {
+        alert("برای تکمیل دوره، پاسخ پیشنهادی هر پنج سناریو را مشاهده کنید.");
+        return;
+    }
+
+    state.finished=true;
+    saveState();
+
+    document.getElementById("completion").classList.add("show");
+
+    updateFinalStats();
+}
+
+/* ===============================
+   ذخیره متن‌های دانشجو
+================================ */
+
+for(let i=0;i<5;i++) {
+
+    const area=document.getElementById("answer"+i);
+
+    area.addEventListener("input",function() {
+        state.notes[i]=this.value;
+        saveState();
+    });
+}
+
+/* ===============================
+   انتخاب گزینه‌ها
+================================ */
+
+document.querySelectorAll(".option").forEach(label=>{
+
+    label.addEventListener("click",function(){
+
+        const parent=this.parentElement;
+
+        parent.querySelectorAll(".option").forEach(el=>{
+            el.classList.remove("selected");
+        });
+
+        this.classList.add("selected");
+
+        const radio=this.querySelector("input");
+
+        if(radio) radio.checked=true;
+
+    });
+
+});
+
+/* ===============================
+   شروع مجدد
+================================ */
+
+function resetCourse() {
+
+    const confirmed=confirm(
+        "آیا مطمئن هستید؟ تمام پاسخ‌ها و پیشرفت ذخیره‌شده پاک می‌شوند."
+    );
+
+    if(!confirmed) return;
+
+    localStorage.removeItem(STORAGE_KEY);
+
+    location.reload();
+}
+
+/* ===============================
+   راه‌اندازی اولیه
+================================ */
+
+restoreAnswers();
+
+updateProgress();
+
+updateFinalStats();
+
+calculateOR();
+
+</script>
+
+</body>
+</html>
